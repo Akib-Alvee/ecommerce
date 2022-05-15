@@ -8,12 +8,9 @@ import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useContext } from 'react';
 import { Store } from './store';
-
 function App() {
   const { state } = useContext(Store);
-
   const { cart } = state;
-
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -21,14 +18,14 @@ function App() {
           <Navbar bg="dark" variant="dark">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>Ecommerce</Navbar.Brand>
+                <Navbar.Brand>amazona</Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      {cart.cartItems.length}
                     </Badge>
                   )}
                 </Link>
@@ -37,7 +34,7 @@ function App() {
           </Navbar>
         </header>
         <main>
-          <Container>
+          <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
@@ -45,7 +42,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className="text-center"> All rights reserved</div>
+          <div className="text-center">All rights reserved</div>
         </footer>
       </div>
     </BrowserRouter>
