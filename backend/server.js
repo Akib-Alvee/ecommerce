@@ -16,6 +16,7 @@ app.get('/api/products/slug/:slug', (req, res) => {
 });
 app.get('/api/products/:id', (req, res) => {
   const product = data.products.find((x) => x._id === req.params.id);
+  // console.log(data.products);
   if (product) {
     res.send(product);
   } else {
