@@ -38,6 +38,7 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.account = req.body.account || user.account;
       user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
@@ -57,6 +58,7 @@ userRouter.post(
           _id: user._id,
           name: user.name,
           email: user.email,
+          account: user.account,
           isAdmin: user.isAdmin,
           token: generateToken(user),
         });
@@ -91,6 +93,7 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
+      account: req.body.account,
       password: bcrypt.hashSync(req.body.password),
     });
     const user = await newUser.save();
@@ -98,6 +101,7 @@ userRouter.post(
       _id: user._id,
       name: user.name,
       email: user.email,
+      account: user.account,
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });

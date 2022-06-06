@@ -45,6 +45,7 @@ export default function UserEditScreen() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function UserEditScreen() {
         });
         setName(data.name);
         setEmail(data.email);
+        setAccount(data.account);
         setIsAdmin(data.isAdmin);
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
@@ -74,7 +76,7 @@ export default function UserEditScreen() {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
         `/api/users/${userId}`,
-        { _id: userId, name, email, isAdmin },
+        { _id: userId, name, email, account, isAdmin },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
@@ -116,6 +118,15 @@ export default function UserEditScreen() {
               value={email}
               type="email"
               onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="account">
+            <Form.Label>Account</Form.Label>
+            <Form.Control
+              value={account}
+              type="account"
+              onChange={(e) => setAccount(e.target.value)}
               required
             />
           </Form.Group>

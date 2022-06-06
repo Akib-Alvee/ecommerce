@@ -17,6 +17,7 @@ export default function SignupScreen() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -32,6 +33,7 @@ export default function SignupScreen() {
       const { data } = await Axios.post('/api/users/signup', {
         name,
         email,
+        account,
         password,
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
@@ -66,6 +68,14 @@ export default function SignupScreen() {
             type="email"
             required
             onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="account">
+          <Form.Label>Bank Account Number</Form.Label>
+          <Form.Control
+            type="account"
+            required
+            onChange={(e) => setAccount(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
