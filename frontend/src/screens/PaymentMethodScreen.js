@@ -12,6 +12,9 @@ export default function PaymentMethodScreen() {
   const {
     cart: { shippingAddress, paymentMethod },
   } = state;
+  const [accountname, setAccountName] = useState('');
+  const [accountnumber, setAccountNumber] = useState('');
+  const [bankpassword, setBankPassword] = useState('');
 
   const [paymentMethodName, setPaymentMethod] = useState(
     paymentMethod || 'PayPal'
@@ -33,20 +36,34 @@ export default function PaymentMethodScreen() {
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className="container small-container">
         <Helmet>
-          <title>Payment Method</title>
+          <title>E-Bank Information</title>
         </Helmet>
-        <h1 className="my-3">Payment Method</h1>
+        <h1 className="my-3">E-Bank Information</h1>
         <Form onSubmit={submitHandler}>
-          <div className="mb-3">
-            <Form.Check
-              type="radio"
-              id="E-Bank"
-              label="E-Bank"
-              value="E-Bank"
-              checked={paymentMethodName === 'E-Bank'}
-              onChange={(e) => setPaymentMethod(e.target.value)}
+          <Form.Group className="mb-3" controlId="accountname">
+            <Form.Label>Account Name</Form.Label>
+            <Form.Control
+              type="accountname"
+              required
+              onChange={(e) => setAccountName(e.target.value)}
             />
-          </div>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="accountnumber">
+            <Form.Label>Account Number</Form.Label>
+            <Form.Control
+              type="accountnumber"
+              required
+              onChange={(e) => setAccountNumber(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="bankpassword">
+            <Form.Label>Bank Password</Form.Label>
+            <Form.Control
+              type="password"
+              required
+              onChange={(e) => setBankPassword(e.target.value)}
+            />
+          </Form.Group>
 
           <div className="mb-3">
             <Button type="submit">Continue</Button>
