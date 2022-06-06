@@ -15,6 +15,11 @@ import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen ';
+import ProtectedRoute from './Components/ProtectedRoute';
+import DashboardScreen from './screens/DashboardScreen';
+import AdminRoute from './Components/AdminRoute';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -32,7 +37,7 @@ function App() {
           <Navbar bg="dark" variant="dark">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>amazona</Navbar.Brand>
+                <Navbar.Brand>Ecommerce</Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
@@ -65,6 +70,22 @@ function App() {
                     Sign In
                   </Link>
                 )}
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown title="Admin" id="admin-nav-dropdown">
+                    <LinkContainer to="/admin/dashboard">
+                      <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/products">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/orders">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/users">
+                      <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                )}
               </Nav>
             </Container>
           </Navbar>
@@ -76,9 +97,35 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
+              ></Route>
+              {/* Admin Routes */}
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/products"
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <ProductEditScreen />
+                  </AdminRoute>
+                }
               ></Route>
               <Route path="/" element={<HomeScreen />} />
             </Routes>
