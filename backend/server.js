@@ -8,6 +8,7 @@ import userRouter from './routes/userRoutes.js';
 import Product from './models/productModals.js';
 import uploadRouter from './routes/uploadRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
+// import bankRouter fro m './routes/bankRoutes.js';
 
 dotenv.config();
 mongoose
@@ -29,6 +30,7 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/orders', orderRouter);
+// app.use('/api/bank', bankRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
