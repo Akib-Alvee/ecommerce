@@ -13,9 +13,11 @@ main {
   flex: 1;
 }
 .btn-primary {
-  background-color: #404040;
+  background-color: #72e8bd;
 }
-
+.navbar {
+  background-color: #7df7ca;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
