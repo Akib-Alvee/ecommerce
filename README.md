@@ -40,3 +40,8 @@ npm install
 ```
 npm start
 ```
+
+
+Author :
+2017331001 (Fahim Ur Rashid)
+2017331049 (Md. Akibul Islam Alvee)
