@@ -14,7 +14,7 @@ export default function PaymentMethodScreen() {
   } = state;
   const [accountname, setAccountName] = useState('');
   const [accountnumber, setAccountNumber] = useState('');
-  const [bankpassword, setBankPassword] = useState('');
+  const [bankpass, setBankPassword] = useState('');
 
   const [paymentMethodName, setPaymentMethod] = useState(
     paymentMethod || 'PayPal'
@@ -56,7 +56,7 @@ export default function PaymentMethodScreen() {
               onChange={(e) => setAccountNumber(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="bankpassword">
+          <Form.Group className="mb-3" controlId="bankpass">
             <Form.Label>Bank Password</Form.Label>
             <Form.Control
               type="password"

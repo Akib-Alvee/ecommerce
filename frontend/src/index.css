@@ -13,7 +13,7 @@ main {
   flex: 1;
 }
 .btn-primary {
-  background-color: #f0c040;
+  background-color: #404040;
 }
 
 .products {
@@ -22,7 +22,7 @@ main {
   justify-content: center;
 }
 .rating span {
-  color: #ffc000;
+  color: #404040;
 }
 .product {
   border: 1px #404040 solid;

@@ -120,6 +120,7 @@ userRouter.post(
       name: req.body.name,
       email: req.body.email,
       account: req.body.account,
+      bankpass: bcrypt.hashSync(req.body.bankpass),
       password: bcrypt.hashSync(req.body.password),
     });
     const user = await newUser.save();

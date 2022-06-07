@@ -18,6 +18,7 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [account, setAccount] = useState('');
+  const [bankpass, setBankPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -34,6 +35,7 @@ export default function SignupScreen() {
         name,
         email,
         account,
+        bankpass,
         password,
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
@@ -76,6 +78,14 @@ export default function SignupScreen() {
             type="account"
             required
             onChange={(e) => setAccount(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="bankpass">
+          <Form.Label>Bank Password</Form.Label>
+          <Form.Control
+            type="password"
+            required
+            onChange={(e) => setBankPassword(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
