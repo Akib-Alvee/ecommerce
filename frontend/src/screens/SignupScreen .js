@@ -31,13 +31,16 @@ export default function SignupScreen() {
       return;
     }
     try {
-      const { data } = await Axios.post('/api/users/signup', {
-        name,
-        email,
-        account,
-        bankpass,
-        password,
-      });
+      const { data } = await Axios.post(
+        'http://localhost:5000/api/users/signup',
+        {
+          name,
+          email,
+          account,
+          bankpass,
+          password,
+        }
+      );
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');

@@ -31,13 +31,15 @@ export default function PlaceOrderScreen() {
   const navigate = useNavigate();
   const location = useLocation();
   const bankdata = location.state.bankdata;
-  // console.log(bankdata);
+  console.log(bankdata);
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+
+  console.log({ userInfo });
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
   cart.itemsPrice = round2(
@@ -47,28 +49,26 @@ export default function PlaceOrderScreen() {
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
   bankdata.amount = cart.totalPrice;
-  // console.log(bankdata);
+  //bankdata.amount = 45;
+  //console.log(bankdata);
   let axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
       'Access-Control-Allow-Origin': '*',
     },
   };
+  let transactionID = '';
   async function placeOrderHandler() {
+    console.log('hello aju');
     try {
-      const transactionID = await axios.post(
-        'http://localhost:6000/transaction/payment/',
+      const response = await axios.post(
+        'http://localhost:3301/transaction/payment',
         bankdata,
         axiosConfig
       );
+      console.log({ response });
+      transactionID = response.data.Transaction_ID;
       console.log(transactionID);
-      transactionID
-        .then(function () {
-          console.log('Hi in the ghdgd');
-        })
-        .catch(function () {
-          console.log('Error');
-        });
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +76,7 @@ export default function PlaceOrderScreen() {
       dispatch({ type: 'CREATE_REQUEST' });
 
       const { data } = await axios.post(
-        '/api/orders',
+        'http://localhost:5000/api/orders',
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -92,10 +92,11 @@ export default function PlaceOrderScreen() {
           },
         }
       );
+      console.log(data);
       ctxDispatch({ type: 'CART_CLEAR' });
       dispatch({ type: 'CREATE_SUCCESS' });
       localStorage.removeItem('cartItems');
-      navigate(`/order/${data.order._id}`);
+      navigate(`/order/${data.order._id}`, { state: { transactionID } });
     } catch (err) {
       dispatch({ type: 'CREATE_FAIL' });
       toast.error(getError(err));
