@@ -25,8 +25,6 @@ export default function PaymentMethodScreen() {
     amount: '',
   };
 
-  // console.log(bankdata);
-
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate('/shipping', { state: { bankdata } });
