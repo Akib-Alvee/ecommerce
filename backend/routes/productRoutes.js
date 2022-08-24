@@ -7,7 +7,7 @@ const productRouter = express.Router();
 productRouter.get('/', async (req, res) => {
   console.log('Ïn the products route');
   const products = await Product.find();
-  //console.log(products);
+  // console.log(products);
   res.send(products);
 });
 productRouter.post(

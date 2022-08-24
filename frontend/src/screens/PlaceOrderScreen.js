@@ -1,4 +1,5 @@
-import Axios from 'axios';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
@@ -28,7 +29,9 @@ const reducer = (state, action) => {
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const bankdata = location.state.bankdata;
+  // console.log(bankdata);
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
@@ -43,12 +46,36 @@ export default function PlaceOrderScreen() {
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
-
-  const placeOrderHandler = async () => {
+  bankdata.amount = cart.totalPrice;
+  // console.log(bankdata);
+  let axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+    },
+  };
+  async function placeOrderHandler() {
+    try {
+      const transactionID = await axios.post(
+        'http://localhost:6000/transaction/payment/',
+        bankdata,
+        axiosConfig
+      );
+      console.log(transactionID);
+      transactionID
+        .then(function () {
+          console.log('Hi in the ghdgd');
+        })
+        .catch(function () {
+          console.log('Error');
+        });
+    } catch (error) {
+      console.log(error);
+    }
     try {
       dispatch({ type: 'CREATE_REQUEST' });
 
-      const { data } = await Axios.post(
+      const { data } = await axios.post(
         '/api/orders',
         {
           orderItems: cart.cartItems,
@@ -73,7 +100,7 @@ export default function PlaceOrderScreen() {
       dispatch({ type: 'CREATE_FAIL' });
       toast.error(getError(err));
     }
-  };
+  }
 
   useEffect(() => {
     if (!cart.paymentMethod) {

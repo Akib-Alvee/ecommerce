@@ -15,21 +15,28 @@ export default function PaymentMethodScreen() {
   const [accountname, setAccountName] = useState('');
   const [accountnumber, setAccountNumber] = useState('');
   const [bankpass, setBankPassword] = useState('');
-
   const [paymentMethodName, setPaymentMethod] = useState(
     paymentMethod || 'PayPal'
   );
+  let bankdata = {
+    sender: accountname,
+    reciever: 'fahim shah',
+    password: bankpass,
+    amount: '',
+  };
+
+  // console.log(bankdata);
 
   useEffect(() => {
     if (!shippingAddress.address) {
-      navigate('/shipping');
+      navigate('/shipping', { state: { bankdata } });
     }
   }, [shippingAddress, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
     localStorage.setItem('paymentMethod', paymentMethodName);
-    navigate('/placeorder');
+    navigate('/placeorder', { state: { bankdata } });
   };
   return (
     <div>

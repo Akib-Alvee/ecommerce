@@ -9,6 +9,7 @@ import Product from './models/productModals.js';
 import uploadRouter from './routes/uploadRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 // import bankRouter fro m './routes/bankRoutes.js';
+import cors from 'cors';
 
 dotenv.config();
 mongoose
@@ -21,6 +22,8 @@ mongoose
   });
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,5 +41,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`serve at http://localhost:${port}`);
+  console.log(`server at http://localhost:${port}`);
 });
