@@ -20,7 +20,7 @@ export default function PaymentMethodScreen() {
   );
   let bankdata = {
     sender: accountname,
-    reciever: 'Ecommerce Authority',
+    reciever: 'fahim shah',
     password: bankpass,
     amount: '',
   };

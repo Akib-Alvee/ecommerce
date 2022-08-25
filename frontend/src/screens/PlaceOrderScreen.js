@@ -46,7 +46,7 @@ export default function PlaceOrderScreen() {
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.15 * cart.itemsPrice);
+  cart.taxPrice = round2(0.5 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
   bankdata.amount = cart.totalPrice;
   //bankdata.amount = 45;
@@ -59,16 +59,16 @@ export default function PlaceOrderScreen() {
   };
   let transactionID = '';
   async function placeOrderHandler() {
-    console.log('hello aju');
+    // console.log('hello aju');
     try {
       const response = await axios.post(
         'http://localhost:3301/transaction/payment',
         bankdata,
         axiosConfig
       );
-      console.log({ response });
+      //console.log({ response });
       transactionID = response.data.Transaction_ID;
-      console.log(transactionID);
+      // console.log(transactionID);
     } catch (error) {
       console.log(error);
     }
