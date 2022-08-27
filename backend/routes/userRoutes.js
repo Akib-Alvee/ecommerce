@@ -120,6 +120,7 @@ userRouter.post(
       name: req.body.name,
       email: req.body.email,
       account: req.body.account,
+      isAdmin:req.body.isAdmin,
       bankpass: bcrypt.hashSync(req.body.bankpass),
       password: bcrypt.hashSync(req.body.password),
     });

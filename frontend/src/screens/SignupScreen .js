@@ -1,14 +1,14 @@
 import Axios from 'axios';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import { useContext, useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
-import { useContext, useEffect, useState } from 'react';
-import { Store } from '../store';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Store } from '../store';
 import { getError } from '../utils';
-
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -56,11 +56,13 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
+
     <Container className="small-container">
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
       <h1 className="my-3">Sign Up</h1>
+
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
@@ -115,6 +117,7 @@ export default function SignupScreen() {
           <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
       </Form>
+
     </Container>
   );
 }
