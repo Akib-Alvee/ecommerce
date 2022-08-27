@@ -65,7 +65,7 @@ export default function ProductEditScreen() {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(
-          `http://localhost:5000/api/products/${productId}`
+          `http://localhost:5001/api/products/${productId}`
         );
         setName(data.name);
         setSlug(data.slug);
@@ -91,7 +91,7 @@ export default function ProductEditScreen() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `http://localhost:5000/api/products/${productId}`,
+        `http://localhost:5001/api/products/${productId}`,
         {
           _id: productId,
           name,
@@ -125,7 +125,7 @@ export default function ProductEditScreen() {
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const { data } = await axios.post(
-        'http://localhost:5000/api/upload',
+        'http://localhost:5001/api/upload',
         bodyFormData,
         {
           headers: {

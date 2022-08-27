@@ -1,33 +1,38 @@
+import { useContext } from 'react';
+import Badge from 'react-bootstrap/Badge';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import Navbar from 'react-bootstrap/Navbar';
-import Badge from 'react-bootstrap/Badge';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
-import { useContext } from 'react';
-import { Store } from './store';
-import CartScreen from './screens/CartScreen';
-import SigninScreen from './screens/SigninScreen';
-import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import SignupScreen from './screens/SignupScreen ';
-import ProtectedRoute from './Components/ProtectedRoute';
-import DashboardScreen from './screens/DashboardScreen';
 import AdminRoute from './Components/AdminRoute';
-import ProductListScreen from './screens/ProductListScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
-import UserListScreen from './screens/UserListScreen';
-import UserEditScreen from './screens/UserEditScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import SellerRoute from './Components/SellerRoute';
+import CartScreen from './screens/CartScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import HomeScreen from './screens/HomeScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import OrderListScreen from './screens/OrderListScreen';
+import SellerOrderListScreen from './screens/SellerOrderListScreen';
+
+import OrderScreen from './screens/OrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
-import OrderListScreen from './screens/OrderListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductScreen from './screens/ProductScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import SellerProductEditScreen from './screens/SellerProductEditScreen';
+import SellerProductListScreen from './screens/SellerProductListScreen';
+import SellerSigninScreen from './screens/SellerSigninScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import SigninScreen from './screens/SigninScreen';
+import SignupScreen from './screens/SignupScreen ';
+import UserEditScreen from './screens/UserEditScreen';
+import UserListScreen from './screens/UserListScreen';
+import { Store } from './store';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -99,6 +104,23 @@ function App() {
                       </LinkContainer>
                     </NavDropdown>
                   )}
+
+                     {userInfo && userInfo.isSeller && (
+                    <NavDropdown title="Supplier" id="admin-nav-dropdown">
+                      <LinkContainer to="/seller/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/seller/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/seller/orders">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/seller/users">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -112,6 +134,7 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              <Route path="/sellersignin" element={<SellerSigninScreen/>} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
@@ -172,6 +195,55 @@ function App() {
                   <AdminRoute>
                     <UserEditScreen />
                   </AdminRoute>
+                }
+              ></Route>
+                {/* Seller Routes */}
+                <Route
+                path="/seller/dashboard"
+                element={
+                  <SellerRoute>
+                    <DashboardScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/orders"
+                element={
+                  <SellerRoute>
+                    <SellerOrderListScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/users"
+                element={
+                  <SellerRoute>
+                    <UserListScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/products"
+                element={
+                  <SellerRoute>
+                    <SellerProductListScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/product/:id"
+                element={
+                  <SellerRoute>
+                    <SellerProductEditScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/user/:id"
+                element={
+                  <SellerRoute>
+                    <UserEditScreen />
+                  </SellerRoute>
                 }
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>

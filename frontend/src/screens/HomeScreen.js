@@ -1,12 +1,12 @@
-import { useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
-import logger from 'use-reducer-logger';
-import Row from 'react-bootstrap/Row';
+import { useEffect, useReducer } from 'react';
 import Col from 'react-bootstrap/Col';
-import Product from '../Components/product';
+import Row from 'react-bootstrap/Row';
 import { Helmet } from 'react-helmet-async';
+import logger from 'use-reducer-logger';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
+import Product from '../Components/product';
 //import data from '../data';
 
 const reducer = (state, action) => {

@@ -13,10 +13,11 @@ main {
   flex: 1;
 }
 .btn-primary {
-  background-color: #72e8bd;
+  background-color: #725302;
 }
 .navbar {
-  background-color: #7df7ca;
+  background-color: rgb(221, 128, 36);
+  height: 8vh;
 }
 .products {
   display: flex;
@@ -28,12 +29,13 @@ main {
 }
 .product {
   border: 1px #404040 solid;
-  margin: 1rem;
+  margin: 10rem;
 }
 
 .product img {
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
+  height: 350px;
 }
 
 .product-info {
@@ -46,8 +48,9 @@ main {
 .img-thumbnail {
   height: 80px;
 }
+
 .small-container {
-  max-width: 600px;
+  max-width: 400px;
 }
 .checkout-steps > div {
   border-bottom: 0.2rem solid #a0a0a0;

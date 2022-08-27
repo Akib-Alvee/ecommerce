@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Store } from '../store';
 import { getError } from '../utils';
@@ -24,7 +24,7 @@ export default function SigninScreen() {
     e.preventDefault();
     try {
       const { data } = await Axios.post(
-        'http://localhost:5000/api/users/signin',
+        'http://localhost:5001/api/users/sellersignin',
         {
           email,
           password,
@@ -70,15 +70,7 @@ export default function SigninScreen() {
         <div className="mb-3">
           <Button type="submit">Sign In</Button>
         </div>
-        <div className="mb-2">
-        <a href='/sellersignin'>
-          <Button type="button">Supplier</Button>
-        </a>
-        </div>
-        <div className="mb-3">
-          New customer?{' '}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
-        </div>
+      
       </Form>
     </Container>
   );
