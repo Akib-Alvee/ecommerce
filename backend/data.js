@@ -5,7 +5,7 @@ const data = {
     {
       name: 'fahim',
       email: 'fahim.sust.edu@gmail.com',
-      account: '12345',
+      // account: '12345',
       password: bcrypt.hashSync('123456'),
       isAdmin: true,
     },
@@ -13,7 +13,7 @@ const data = {
     {
       name: 'Alvee',
       email: 'user1@gmail.com',
-      account: '123456',
+      // account: '123456',
       password: bcrypt.hashSync('123456'),
       isAdmin: false,
     },

@@ -37,7 +37,7 @@ function ProductScreen() {
     loading: true,
     error: '',
   });
-  console.log(product);
+  // console.log(product);
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });

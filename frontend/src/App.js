@@ -24,6 +24,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import BankInfoScreen from './screens/BankInfoScreen';
 import SellerProductEditScreen from './screens/SellerProductEditScreen';
 import SellerProductListScreen from './screens/SellerProductListScreen';
 import SellerSigninScreen from './screens/SellerSigninScreen';
@@ -67,6 +68,9 @@ function App() {
                   </Link>
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                      <LinkContainer to="/bank">
+                        <NavDropdown.Item>Bank Information</NavDropdown.Item>
+                      </LinkContainer>
                       <LinkContainer to="/profile">
                         <NavDropdown.Item>User Profile</NavDropdown.Item>
                       </LinkContainer>
@@ -105,7 +109,7 @@ function App() {
                     </NavDropdown>
                   )}
 
-                     {userInfo && userInfo.isSeller && (
+                  {userInfo && userInfo.isSeller && (
                     <NavDropdown title="Supplier" id="admin-nav-dropdown">
                       <LinkContainer to="/seller/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
@@ -134,9 +138,10 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
-              <Route path="/sellersignin" element={<SellerSigninScreen/>} />
+              <Route path="/sellersignin" element={<SellerSigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
+              <Route path="/bank" element={<BankInfoScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />}></Route>
               <Route
@@ -197,8 +202,8 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-                {/* Seller Routes */}
-                <Route
+              {/* Seller Routes */}
+              <Route
                 path="/seller/dashboard"
                 element={
                   <SellerRoute>

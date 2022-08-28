@@ -30,7 +30,7 @@ export default function PlaceOrderScreen() {
   const navigate = useNavigate();
   const location = useLocation();
   const bankdata = location.state.bankdata;
-  console.log(bankdata);
+  // console.log(bankdata);
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
@@ -38,7 +38,7 @@ export default function PlaceOrderScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
-  console.log({ userInfo });
+  // console.log({ userInfo });
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
   cart.itemsPrice = round2(
@@ -91,7 +91,7 @@ export default function PlaceOrderScreen() {
           },
         }
       );
-      const { data:newdata } = await axios.post(
+      const { data: newdata } = await axios.post(
         'http://localhost:5001/api/orders',
         {
           orderItems: cart.cartItems,
@@ -100,8 +100,8 @@ export default function PlaceOrderScreen() {
           itemsPrice: cart.itemsPrice,
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
-          totalPrice: cart.totalPrice*.8,
-          transactionID:transactionID,
+          totalPrice: cart.totalPrice * 0.8,
+          transactionID: transactionID,
         },
         {
           headers: {
@@ -109,7 +109,7 @@ export default function PlaceOrderScreen() {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
       ctxDispatch({ type: 'CART_CLEAR' });
       dispatch({ type: 'CREATE_SUCCESS' });
       localStorage.removeItem('cartItems');

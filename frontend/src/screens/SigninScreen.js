@@ -71,9 +71,9 @@ export default function SigninScreen() {
           <Button type="submit">Sign In</Button>
         </div>
         <div className="mb-2">
-        <a href='/sellersignin'>
-          <Button type="button">Supplier</Button>
-        </a>
+          <a href="/sellersignin">
+            <Button type="button">Supplier</Button>
+          </a>
         </div>
         <div className="mb-3">
           New customer?{' '}

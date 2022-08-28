@@ -78,7 +78,7 @@ export default function ProductListScreen() {
   const { userInfo } = state;
 
   useEffect(() => {
-    console.log(userInfo.token)
+    console.log(userInfo.token);
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
@@ -87,9 +87,9 @@ export default function ProductListScreen() {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        console.log({data})
-          
-        dispatch({ type: 'FETCH_SUCCESS', payload: {products:data} });
+        console.log({ data });
+
+        dispatch({ type: 'FETCH_SUCCESS', payload: { products: data } });
       } catch (err) {}
     };
     if (successDelete) {
@@ -143,7 +143,7 @@ export default function ProductListScreen() {
 
   return (
     <div>
-      <Row>
+      {/* <Row>
         <Col>
           <h1>Products</h1>
         </Col>
@@ -154,7 +154,7 @@ export default function ProductListScreen() {
             </Button>
           </div>
         </Col>
-      </Row>
+      </Row> */}
 
       {loadingCreate && <LoadingBox></LoadingBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -195,6 +195,7 @@ export default function ProductListScreen() {
                     <Button
                       type="button"
                       variant="light"
+                      color="green"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete

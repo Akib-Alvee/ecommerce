@@ -32,7 +32,7 @@ export default function SigninScreen() {
       );
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      navigate('/seller/orders');
     } catch (err) {
       toast.error(getError(err));
     }
@@ -70,7 +70,6 @@ export default function SigninScreen() {
         <div className="mb-3">
           <Button type="submit">Sign In</Button>
         </div>
-      
       </Form>
     </Container>
   );

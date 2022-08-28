@@ -1,5 +1,4 @@
 import Axios from 'axios';
-
 import { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -13,12 +12,11 @@ export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const redirect = redirectInUrl ? redirectInUrl : '/bank';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [account, setAccount] = useState('');
-  const [bankpass, setBankPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -35,15 +33,14 @@ export default function SignupScreen() {
         'http://localhost:5000/api/users/signup',
         {
           name,
+          username,
           email,
-          account,
-          bankpass,
           password,
         }
       );
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      navigate('/bank');
     } catch (err) {
       toast.error(getError(err));
     }
@@ -56,7 +53,6 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-
     <Container className="small-container">
       <Helmet>
         <title>Sign Up</title>
@@ -68,7 +64,14 @@ export default function SignupScreen() {
           <Form.Label>Name</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} required />
         </Form.Group>
-
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="username"
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -77,22 +80,7 @@ export default function SignupScreen() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="account">
-          <Form.Label>Bank Account Number</Form.Label>
-          <Form.Control
-            type="account"
-            required
-            onChange={(e) => setAccount(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="bankpass">
-          <Form.Label>Bank Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setBankPassword(e.target.value)}
-          />
-        </Form.Group>
+
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -117,7 +105,6 @@ export default function SignupScreen() {
           <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
       </Form>
-
     </Container>
   );
 }
