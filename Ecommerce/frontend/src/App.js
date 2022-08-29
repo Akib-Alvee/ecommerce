@@ -131,9 +131,6 @@ function App() {
                       <LinkContainer to="/seller/orders">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/seller/users">
-                        <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
                     </NavDropdown>
                   )}
                 </Nav>
@@ -232,14 +229,6 @@ function App() {
                 element={
                   <SellerRoute>
                     <SellerOrderListScreen />
-                  </SellerRoute>
-                }
-              ></Route>
-              <Route
-                path="/seller/users"
-                element={
-                  <SellerRoute>
-                    <UserListScreen />
                   </SellerRoute>
                 }
               ></Route>
