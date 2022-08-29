@@ -51,6 +51,20 @@ npm install
 ```
 npm start
 ```
+When a user logged in as a supplier, he/she will interact with the supplier interface where a supplier can see the order history, payment status and delivery status. In another terminal go to supplier-api folder install npm then start the npm.
+
+```
+cd Ecommerce
+```
+```
+cd frontend
+```
+```
+npm install
+```
+```
+npm start
+```
 
 In another terminal go to Bank Api folder and then server and install npm then start the npm.
 
@@ -67,20 +81,7 @@ npm install
 npm start
 ```
 
-In another terminal go to supplier-api folder install npm then start the npm.
 
-```
-cd Ecommerce
-```
-```
-cd frontend
-```
-```
-npm install
-```
-```
-npm start
-```
 
 Author :<br>
 2017331001 (Fahim Ur Rashid)<br>
