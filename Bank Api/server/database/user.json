@@ -1,0 +1,26 @@
+[
+  {
+    "name": "akibul islam",
+    "address": "Surma R/A",
+    "email": "alvee@gmail.com",
+    "username": "alvee",
+    "password": "12345",
+    "balance": 0
+  },
+  {
+    "name": "fahim",
+    "address": "Surma R/A0",
+    "email": "fahim@gmail.com",
+    "username": "fahim0",
+    "password": "12345",
+    "balance": 0
+  },
+  {
+    "name": "fahimur",
+    "address": "Surma R/A",
+    "email": "fahim@gmail.com",
+    "username": "fahim khan",
+    "password": "123456",
+    "balance": 0
+  }
+]

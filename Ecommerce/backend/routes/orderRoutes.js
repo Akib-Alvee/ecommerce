@@ -1,13 +1,15 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth, isSeller } from '../../sellerutils.js';
-import Order from '../model/sellerorderModel.js';
+import Order from '../models/orderModel.js';
+import User from '../models/userModel.js';
+import Product from '../models/productModals.js';
+import { isAuth, isAdmin } from '../utils.js';
 
 const orderRouter = express.Router();
 orderRouter.get(
   '/',
   isAuth,
-  isSeller,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find().populate('user', 'name');
     res.send(orders);
@@ -26,13 +28,56 @@ orderRouter.post(
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       user: req.user._id,
-      transactionID: req.body.transactionID,
     });
 
     const order = await newOrder.save();
     res.status(201).send({ message: 'New Order Created', order });
   })
 );
+orderRouter.get(
+  '/summary',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          numOrders: { $sum: 1 },
+          totalSales: { $sum: '$totalPrice' },
+        },
+      },
+    ]);
+    const users = await User.aggregate([
+      {
+        $group: {
+          _id: null,
+          numUsers: { $sum: 1 },
+        },
+      },
+    ]);
+    const dailyOrders = await Order.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          orders: { $sum: 1 },
+          sales: { $sum: '$totalPrice' },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+    // const productCategories = await Product.aggregate([
+    //   {
+    //     $group: {
+    //       _id: '$category',
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+    res.send({ users, orders, dailyOrders });
+  })
+);
+
 orderRouter.get(
   '/mine',
   isAuth,
@@ -73,7 +118,7 @@ export default orderRouter;
 orderRouter.delete(
   '/:id',
   isAuth,
-  isSeller,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
