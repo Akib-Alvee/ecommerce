@@ -152,7 +152,7 @@ export default function PlaceOrderScreen() {
             <Card.Body>
               <Card.Title>Payment</Card.Title>
               <Card.Text>
-                <strong>Method:</strong>
+                <strong>Method: Bank</strong>
               </Card.Text>
               <Link to="/payment">Edit</Link>
             </Card.Body>

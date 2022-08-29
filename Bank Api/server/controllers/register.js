@@ -1,7 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import UserDetails from '../models/userSchema.js';
-// import BankRegister from '../models/registerSchema.js';
+import mongoose from 'mongoose';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
 const router = express.Router();

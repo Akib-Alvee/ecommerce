@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/', register);
 
 router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hit the get point of register!' });
+  res.status(200).json({ message: 'this is the register hit poiht' });
 });
 
 export default router;

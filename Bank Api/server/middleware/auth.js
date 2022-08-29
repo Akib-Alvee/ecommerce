@@ -1,13 +1,14 @@
 import jwt from 'jsonwebtoken';
 
+//we take a  secret key which is recognized by token
 const secret = 'test';
 
 const auth = async (req, res, next) => {
   const token = req.cookies.token || '';
-  // console.log(token);
+
   try {
     if (!token) {
-      return res.status(401).json('You need to login');
+      return res.status(401).json(' login first');
     }
     const decodedData = jwt.verify(token, 'KEY');
 

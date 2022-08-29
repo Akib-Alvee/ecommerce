@@ -109,7 +109,7 @@ export default function OrderListScreen() {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
-              <th>DETAILS</th>
+              {/* <th>DETAILS</th> */}
             </tr>
           </thead>
           <tbody>
@@ -134,20 +134,7 @@ export default function OrderListScreen() {
                     Done
                   </Button>
                 </td>
-                <td>
-                  <Link to="#">
-                    <Button
-                      type="button"
-                      variant="dark"
-                      // onClick={() => {
-                      //   navigate(`/sellershipping`);
-                      // }}
-                    >
-                      Details
-                    </Button>
-                  </Link>
-                  &nbsp;
-                </td>
+                <td></td>
               </tr>
             ))}
           </tbody>
